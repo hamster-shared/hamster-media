@@ -16,11 +16,8 @@ type New struct {
 }
 
 var (
-	News   [4]New
-	Url    = "https://hamsternet.medium.com"
-	titles []string
-	links  []string
-	covers []string
+	News [4]New
+	Url  = "https://hamsternet.medium.com"
 )
 
 func main() {
@@ -56,6 +53,12 @@ func getNewsNet() error {
 		return err
 	}
 	defer res.Body.Close()
+
+	var (
+		titles []string
+		links  []string
+		covers []string
+	)
 
 	if res.StatusCode != 200 {
 		log.Printf("status code error: %d %s\n", res.StatusCode, res.Status)
