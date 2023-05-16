@@ -22,5 +22,8 @@ func TestSendEmail(t *testing.T) {
 		MiddlewareCategory:    "hello",
 		MiddlewareInformation: "hello",
 	}
-	SendEmail(param)
+	err = SendEmail(param)
+	if err != nil {
+		panic(err)
+	}
 }

@@ -38,6 +38,13 @@ func main() {
 			time.Sleep(time.Minute * 30)
 		}
 	}()
+	// 定时清除访问记录
+	go func() {
+		for {
+			handler.VisitedIP = make(map[string]struct{})
+			time.Sleep(time.Hour * 24)
+		}
+	}()
 	r.GET("/articles", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "ok",

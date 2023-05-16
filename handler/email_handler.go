@@ -28,7 +28,7 @@ func JoinMiddleware(gin *gin.Context) {
 	}
 	clientIp := gin.ClientIP()
 	if _, ok := VisitedIP[clientIp]; ok {
-		Success(nil, gin)
+		Fail("You have submitted middleware information before, please do not submit it repeatedly.", gin)
 		return
 	}
 	err = utils.SendEmail(param)
