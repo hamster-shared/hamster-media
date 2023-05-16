@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"getNews/handler"
 	"github.com/gin-gonic/gin"
 	"github.com/tidwall/gjson"
 	"io"
@@ -43,8 +44,10 @@ func main() {
 			"data":    News,
 		})
 	})
+	r.POST("/JoinMiddleware", handler.JoinMiddleware)
+
 	// 监听并在 0.0.0.0:8080 上启动服务
-	r.Run(":8888")
+	r.Run(":8080")
 }
 
 func getNewsDefault() {
