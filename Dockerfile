@@ -4,6 +4,8 @@ WORKDIR /app
 
 ENV GO111MODULE on
 ENV GOPROXY https://goproxy.cn
+ENV EMAIL_FROM hamster@hamsternet.io
+ENV EMAIL_TO 335247945@qq.com
 
 ADD . /app
 

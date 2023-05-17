@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+package consts
+
+const EmailTemplate = `<!DOCTYPE html>
 <html>
 
 <body>
@@ -11,4 +13,4 @@
   <p><strong>Middleware Information: </strong>{{.MiddlewareInformation}}</p>
 </body>
 
-</html>
+</html>`

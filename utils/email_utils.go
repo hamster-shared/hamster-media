@@ -2,14 +2,16 @@ package utils
 
 import (
 	"bytes"
+	"getNews/consts"
 	"getNews/models"
 	"getNews/models/vo"
-	"github.com/jinzhu/copier"
 	"html/template"
 	"log"
 	"net/smtp"
 	"os"
 	"time"
+
+	"github.com/jinzhu/copier"
 )
 
 func SendEmail(param models.EmailParams) error {
@@ -19,10 +21,10 @@ func SendEmail(param models.EmailParams) error {
 	currentTime := time.Now()
 	formattedTime := currentTime.Format("2006-01-02 15:04:05")
 	emailVo.ApplicationTime = formattedTime
-	tmpl, err := template.ParseFiles("./consts/email_template.html")
+	tmpl, err := template.New("email_template").Parse(consts.EmailTemplate)
 	if err != nil {
 		return err
-	}
+	}	
 	var body bytes.Buffer
 	err = tmpl.Execute(&body, emailVo)
 	if err != nil {
@@ -31,7 +33,7 @@ func SendEmail(param models.EmailParams) error {
 	from := os.Getenv("EMAIL_FROM")
 	password := os.Getenv("EMAIL_PASSWORD")
 	to := os.Getenv("EMAIL_TO")
-	subject := "Join the Hamster Middleware Open Platform"
+	subject := "Middleware Cooperation Application"
 	msg := "From: " + from + "\n" +
 		"To: " + to + "\n" +
 		"Subject: " + subject + "\n" +
