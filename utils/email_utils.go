@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/smtp"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/jinzhu/copier"
@@ -24,7 +25,7 @@ func SendEmail(param models.EmailParams) error {
 	tmpl, err := template.New("email_template").Parse(consts.EmailTemplate)
 	if err != nil {
 		return err
-	}	
+	}
 	var body bytes.Buffer
 	err = tmpl.Execute(&body, emailVo)
 	if err != nil {
@@ -32,10 +33,10 @@ func SendEmail(param models.EmailParams) error {
 	}
 	from := os.Getenv("EMAIL_FROM")
 	password := os.Getenv("EMAIL_PASSWORD")
-	to := os.Getenv("EMAIL_TO")
+	to := strings.Split(os.Getenv("EMAIL_TO"), " ")
 	subject := "Middleware Cooperation Application"
 	msg := "From: " + from + "\n" +
-		"To: " + to + "\n" +
+		"To: " + strings.Join(to, ",") + "\n" +
 		"Subject: " + subject + "\n" +
 		"MIME-Version: 1.0\n" +
 		"Content-type: text/html\n\n" +
@@ -45,7 +46,7 @@ func SendEmail(param models.EmailParams) error {
 			"smtp.gmail.com:587",
 			smtp.PlainAuth("", from, password, "smtp.gmail.com"),
 			from,
-			[]string{to},
+			to,
 			[]byte(msg))
 		if err == nil {
 			log.Println("Email sent successfully!")

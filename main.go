@@ -46,5 +46,5 @@ func main() {
 	r.POST("/JoinMiddleware", handler.JoinMiddleware)
 
 	// 监听并在 0.0.0.0:8888 上启动服务
-	r.Run(":8888")
+	r.Run(":8080")
 }

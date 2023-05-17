@@ -1,21 +1,14 @@
 package handler
 
 import (
-	"fmt"
 	"getNews/models"
 	"getNews/utils"
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
 var VisitedIP map[string]struct{}
 
 func init() {
-	err := godotenv.Load(".env")
-	if err != nil {
-		fmt.Println("warning: dont load .env file")
-		panic(err)
-	}
 	VisitedIP = make(map[string]struct{})
 }
 
