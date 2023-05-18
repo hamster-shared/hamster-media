@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
+	"sync"
 	"time"
 )
 
@@ -31,7 +32,7 @@ func main() {
 	// 定时清除访问记录
 	go func() {
 		for {
-			handler.VisitedIP = make(map[string]struct{})
+			handler.VisitedIP = sync.Map{}
 			time.Sleep(time.Hour * 24)
 		}
 	}()

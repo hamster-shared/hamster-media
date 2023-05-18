@@ -3,32 +3,33 @@ package handler
 import (
 	"getNews/models"
 	"getNews/utils"
+	"log"
+	"sync"
+
 	"github.com/gin-gonic/gin"
 )
 
-var VisitedIP map[string]struct{}
-
-func init() {
-	VisitedIP = make(map[string]struct{})
-}
+var VisitedIP sync.Map
 
 func JoinMiddleware(gin *gin.Context) {
 	var param models.EmailParams
 	err := gin.BindJSON(&param)
 	if err != nil {
+		log.Println(err.Error())
 		Fail("param invalid", gin)
 		return
 	}
 	clientIp := gin.ClientIP()
-	if _, ok := VisitedIP[clientIp]; ok {
+	if _, visited := VisitedIP.Load(clientIp); visited {
+		log.Println("Ip is already ")
 		Fail("You have submitted middleware information before, please do not submit it repeatedly.", gin)
-		return
+		return 
 	}
 	err = utils.SendEmail(param)
 	if err != nil {
 		Fail(err.Error(), gin)
 		return
 	}
-	VisitedIP[clientIp] = struct{}{}
+	VisitedIP.Store(clientIp, struct{}{})	
 	Success(nil, gin)
 }
