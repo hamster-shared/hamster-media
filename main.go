@@ -2,18 +2,19 @@ package main
 
 import (
 	"getNews/handler"
+	"getNews/initialization"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	"sync"
 	"time"
 )
 
 func main() {
 	r := gin.Default()
 	// init default news
+	initialization.Init()
 	handler.GetNewsDefault()
-
+	httpHandler := handler.NewHandlerServer()
 	// 定时拉取在线的新闻
 	go func() {
 		for {
@@ -29,14 +30,6 @@ func main() {
 		}
 	}()
 
-	// 定时清除访问记录
-	go func() {
-		for {
-			handler.VisitedIP = sync.Map{}
-			time.Sleep(time.Hour * 24)
-		}
-	}()
-
 	// api
 	r.GET("/articles", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
@@ -44,8 +37,9 @@ func main() {
 			"data":    handler.News,
 		})
 	})
-	r.POST("/JoinMiddleware", handler.JoinMiddleware)
+
+	r.POST("/JoinMiddleware", httpHandler.JoinMiddleware)
 
 	// 监听并在 0.0.0.0:8888 上启动服务
-	r.Run(":8888")
+	r.Run(":8080")
 }

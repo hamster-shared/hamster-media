@@ -3,15 +3,11 @@ package handler
 import (
 	"getNews/models"
 	"getNews/utils"
-	"log"
-	"sync"
-
 	"github.com/gin-gonic/gin"
+	"log"
 )
 
-var VisitedIP sync.Map
-
-func JoinMiddleware(gin *gin.Context) {
+func (h *HandlerServer) JoinMiddleware(gin *gin.Context) {
 	var param models.EmailParams
 	err := gin.BindJSON(&param)
 	if err != nil {
@@ -20,16 +16,22 @@ func JoinMiddleware(gin *gin.Context) {
 		return
 	}
 	clientIp := gin.ClientIP()
-	if _, visited := VisitedIP.Load(clientIp); visited {
-		log.Println("Ip is already ")
+	if h.emailService.ExitedIp(clientIp) {
+		log.Printf("Ip %s is already exited", clientIp)
 		Fail("You have submitted middleware information before, please do not submit it repeatedly.", gin)
-		return 
+		return
 	}
 	err = utils.SendEmail(param)
 	if err != nil {
+		log.Println(err.Error())
 		Fail(err.Error(), gin)
 		return
 	}
-	VisitedIP.Store(clientIp, struct{}{})	
+	err = h.emailService.SaveIp(param, clientIp)
+	if err != nil {
+		log.Println(err.Error())
+		Fail(err.Error(), gin)
+		return
+	}
 	Success(nil, gin)
 }

@@ -7,6 +7,10 @@ ENV GOPROXY https://goproxy.cn
 ENV EMAIL_FROM default@email_from
 ENV EMAIL_TO "default@email_1 default2@email_2 default3@email_3"
 ENV EMAIL_PASSWORD default
+ENV MYSQL_ROOT_PASSWORD default
+ENV MYSQL_HOST default
+ENV MYSQL_PORT default
+ENV MYSQL_DATABASE default
 
 ADD . /app
 
