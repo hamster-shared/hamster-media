@@ -16,3 +16,10 @@ type MiddlewareIpRecord struct {
 	SocialPlatform string `json:"socialPlatform"`
 	SocialAccount  string `json:"socialAccount"`
 }
+
+//"name": "guozhihao"
+//"email": "335247945@qq.com"
+//"socialPlatform": "gmail",
+//"socialAccount": "guozhihaoemail@gmail.com",
+//"middlewareCategory": "test",
+//"middlewareInformation": "test"

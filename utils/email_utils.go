@@ -19,8 +19,8 @@ func SendEmail(param models.EmailParams) error {
 	var emailVo vo.EmailVo
 	copier.Copy(&emailVo, &param)
 	emailVo.SocialAccount = "[" + param.SocialPlatform + "]" + " " + param.SocialAccount
-	currentTime := time.Now()
-	formattedTime := currentTime.Format("2006-01-02 15:04:05")
+	currentTime := time.Now().UTC()
+	formattedTime := currentTime.Format("2006-01-02 15:04:05") + "(UTC)"
 	emailVo.ApplicationTime = formattedTime
 	tmpl, err := template.New("email_template").Parse(consts.EmailTemplate)
 	if err != nil {

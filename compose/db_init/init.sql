@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS t_middleware_ip_record;
 CREATE TABLE IF NOT EXISTS t_middleware_ip_record (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     ip varchar(64) NOT NULL UNIQUE,
