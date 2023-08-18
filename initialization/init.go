@@ -13,5 +13,7 @@ func Init() {
 		panic("application get db failed")
 	}
 	EmailService := service.NewEmailService(db)
+	activityService := service.NewActivityService(db)
 	application.SetBean[*service.EmailService]("EmailService", EmailService)
+	application.SetBean[*service.ActivityService]("ActivityService", activityService)
 }

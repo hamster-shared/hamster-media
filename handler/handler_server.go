@@ -8,7 +8,8 @@ import (
 )
 
 type HandlerServer struct {
-	emailService service.EmailService
+	emailService    service.EmailService
+	activityService service.ActivityService
 }
 
 func NewHandlerServer() *HandlerServer {
@@ -19,5 +20,12 @@ func NewHandlerServer() *HandlerServer {
 		panic(fmt.Sprintf("application get chainlink request service failed: %s", err.Error()))
 	}
 	handlerServer.emailService = *emailService
+
+	activityService, err := application.GetBean[*service.ActivityService]("ActivityService")
+	if err != nil {
+		log.Println(fmt.Sprintf("application get activity service failed: %s", err.Error()))
+		panic(fmt.Sprintf("application get activity service failed: %s", err.Error()))
+	}
+	handlerServer.activityService = *activityService
 	return &handlerServer
 }

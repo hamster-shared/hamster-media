@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"getNews/models"
+	"getNews/service/parameter"
 	"testing"
 )
 
@@ -12,7 +12,7 @@ func TestSendEmail(t *testing.T) {
 	// 	// 如果获取不到的话，也没事，可能是从 docker 或 k8s 里面启动的
 	// 	fmt.Println("warning: dont load .env file")
 	// }
-	param := models.EmailParams{
+	param := parameter.EmailParams{
 		Name:                  "guozhihao",
 		Email:                 "gmail.guozhihao",
 		SocialPlatform:        "gmail",

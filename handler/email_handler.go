@@ -1,14 +1,14 @@
 package handler
 
 import (
-	"getNews/models"
+	"getNews/service/parameter"
 	"getNews/utils"
 	"github.com/gin-gonic/gin"
 	"log"
 )
 
 func (h *HandlerServer) JoinMiddleware(gin *gin.Context) {
-	var param models.EmailParams
+	var param parameter.EmailParams
 	err := gin.BindJSON(&param)
 	if err != nil {
 		log.Println(err.Error())

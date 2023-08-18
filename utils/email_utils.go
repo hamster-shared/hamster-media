@@ -3,8 +3,8 @@ package utils
 import (
 	"bytes"
 	"getNews/consts"
-	"getNews/models"
-	"getNews/models/vo"
+	"getNews/service/parameter"
+	"getNews/vo"
 	"html/template"
 	"log"
 	"net/smtp"
@@ -15,7 +15,7 @@ import (
 	"github.com/jinzhu/copier"
 )
 
-func SendEmail(param models.EmailParams) error {
+func SendEmail(param parameter.EmailParams) error {
 	var emailVo vo.EmailVo
 	copier.Copy(&emailVo, &param)
 	emailVo.SocialAccount = "[" + param.SocialPlatform + "]" + " " + param.SocialAccount

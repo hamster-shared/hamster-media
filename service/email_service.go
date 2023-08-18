@@ -1,7 +1,8 @@
 package service
 
 import (
-	"getNews/models"
+	"getNews/db"
+	"getNews/service/parameter"
 	"github.com/jinzhu/copier"
 	"gorm.io/gorm"
 )
@@ -17,8 +18,8 @@ func NewEmailService(db *gorm.DB) *EmailService {
 }
 
 func (e *EmailService) ExitedIp(ip string) bool {
-	var visitedIp models.MiddlewareIpRecord
-	err := e.db.Model(&models.MiddlewareIpRecord{}).Where("ip = ?", ip).First(&visitedIp).Error
+	var visitedIp db.MiddlewareIpRecord
+	err := e.db.Model(&db.MiddlewareIpRecord{}).Where("ip = ?", ip).First(&visitedIp).Error
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return false
@@ -27,11 +28,11 @@ func (e *EmailService) ExitedIp(ip string) bool {
 	return true
 }
 
-func (e *EmailService) SaveIp(param models.EmailParams, ip string) error {
-	var visitedIp models.MiddlewareIpRecord
+func (e *EmailService) SaveIp(param parameter.EmailParams, ip string) error {
+	var visitedIp db.MiddlewareIpRecord
 	copier.Copy(&visitedIp, &param)
 	visitedIp.Ip = ip
-	err := e.db.Model(models.MiddlewareIpRecord{}).Create(&visitedIp).Error
+	err := e.db.Model(db.MiddlewareIpRecord{}).Create(&visitedIp).Error
 	if err != nil {
 		return err
 	}

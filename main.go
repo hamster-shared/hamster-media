@@ -40,6 +40,11 @@ func main() {
 
 	r.POST("/JoinMiddleware", httpHandler.JoinMiddleware)
 
+	api := r.Group("/api")
+
+	api.GET("/activity/:id/status", httpHandler.GetActivityStatus)
+	api.GET("/check/deploy", httpHandler.CheckDeploy)
+	api.POST("/nft/airdrop", httpHandler.SaveNftAirdrop)
 	// 监听并在 0.0.0.0:8888 上启动服务
 	r.Run(":8888")
 }
