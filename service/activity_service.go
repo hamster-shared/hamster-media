@@ -6,6 +6,7 @@ import (
 	"getNews/consts"
 	"getNews/db"
 	"getNews/service/parameter"
+	"getNews/vo"
 	"github.com/jinzhu/copier"
 	"gorm.io/gorm"
 	"time"
@@ -52,6 +53,18 @@ func (a *ActivityService) CheckDeploy(walletAddress string, deployNetwork string
 		}
 	} else {
 		return true, err
+	}
+}
+
+func (a *ActivityService) GetDeployContractInfo(walletAddress string, deployNetwork string) (vo vo.NftAirdropVo, err error) {
+	var nftAirdrop db.NftAirdrop
+	err = a.db.Model(db.NftAirdrop{}).Where("wallet_address = ? and deploy_network = ?", walletAddress, deployNetwork).First(&nftAirdrop).Error
+	if err != nil {
+		return vo, err
+	} else {
+		copier.Copy(&vo, &nftAirdrop)
+		vo.DeployTime = nftAirdrop.DeployTime.Time
+		return vo, err
 	}
 }
 

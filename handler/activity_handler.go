@@ -46,3 +46,15 @@ func (h *HandlerServer) CheckDeploy(gin *gin.Context) {
 	}
 	Success(deploy, gin)
 }
+
+func (h *HandlerServer) GetDeployContractInfo(gin *gin.Context) {
+	walletAddress := gin.Query("walletAddress")
+	deployNetwork := gin.Query("deployNetwork")
+	deployInfo, err := h.activityService.GetDeployContractInfo(walletAddress, deployNetwork)
+	if err != nil {
+		log.Println(err.Error())
+		Fail(err.Error(), gin)
+		return
+	}
+	Success(deployInfo, gin)
+}
