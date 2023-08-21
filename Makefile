@@ -1,2 +1,2 @@
 build:
-	docker build -t hamstershare/hamster-media:20230517 .
+	docker build -t hamstershare/hamster-media:20230821 .
