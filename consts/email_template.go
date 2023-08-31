@@ -14,3 +14,20 @@ const EmailTemplate = `<!DOCTYPE html>
 </body>
 
 </html>`
+
+const ContactEcosystemsEmailTemplate = `<!DOCTYPE html>
+<html>
+
+<body>
+  <p><strong>Hi, someone left their contact information on the Hamster official website:</strong></p>
+
+  <p></p>
+  <p><strong>Name: </strong>{{.ContactName}}</p>
+  <p><strong>Email Address: </strong>{{.ContactEmailAddress}}</p>
+  <p><strong>Social Account: </strong>{{.ContactPlatform}} - {{.ContactInformation}}</p>
+  <p><strong>Topic: </strong>{{.Topic}}</p>
+  <p></p>
+  <p><strong>Hamster Team</strong></p>
+</body>
+
+</html>`

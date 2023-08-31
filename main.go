@@ -46,6 +46,9 @@ func main() {
 	api.GET("/check/deploy", httpHandler.CheckDeploy)
 	api.GET("/deploy/info", httpHandler.GetDeployContractInfo)
 	api.POST("/nft/airdrop", httpHandler.SaveNftAirdrop)
+
+	api.GET("/contact/platform", httpHandler.GetContactPlatform)
+	api.POST("/contact/ecosystems", httpHandler.SaveEcosystemsContact)
 	// 监听并在 0.0.0.0:8888 上启动服务
 	r.Run(":8888")
 }
