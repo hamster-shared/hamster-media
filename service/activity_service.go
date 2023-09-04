@@ -86,6 +86,9 @@ func (a *ActivityService) SaveNftAirdrop(param parameter.NftAirdropParam) error 
 	if err != nil {
 		return err
 	}
+	if !activity.IsActiviting() {
+		return errors.New("the activity is not available now")
+	}
 	deploy, err := a.CheckDeploy(param.WalletAddress, param.DeployNetwork)
 	if err != nil {
 		return err
