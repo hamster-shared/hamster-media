@@ -10,6 +10,7 @@ import (
 type HandlerServer struct {
 	emailService    service.EmailService
 	activityService service.ActivityService
+	contactService  service.ContactService
 }
 
 func NewHandlerServer() *HandlerServer {
@@ -27,5 +28,12 @@ func NewHandlerServer() *HandlerServer {
 		panic(fmt.Sprintf("application get activity service failed: %s", err.Error()))
 	}
 	handlerServer.activityService = *activityService
+
+	contactService, err := application.GetBean[*service.ContactService]("ContactService")
+	if err != nil {
+		log.Println(fmt.Sprintf("application get contact service failed: %s", err.Error()))
+		panic(fmt.Sprintf("application get contact service failed: %s", err.Error()))
+	}
+	handlerServer.contactService = *contactService
 	return &handlerServer
 }

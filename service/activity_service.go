@@ -22,23 +22,35 @@ func NewActivityService(db *gorm.DB) *ActivityService {
 	}
 }
 
-func (a *ActivityService) GetActivityStatus(id string) (consts.ActivityStatus, error) {
+func (a *ActivityService) GetActivityStatus(id string) (vo vo.ActivityStatusVo, err error) {
 	var activity db.Activity
-	err := a.db.Model(&db.Activity{}).Where("id = ?", id).First(&activity).Error
+	err = a.db.Model(&db.Activity{}).Where("id = ?", id).First(&activity).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return consts.NonExistent, nil
+			vo.ActivityStatus = consts.NonExistent
+			return vo, nil
 		} else {
-			return consts.NonExistent, err
+			vo.ActivityStatus = consts.NonExistent
+			return vo, err
 		}
 	}
 	now := time.Now()
-	if now.Before(activity.StartTime.Time) {
-		return consts.NotStarted, nil
-	} else if now.After(activity.StartTime.Time) && now.Before(activity.EndTime.Time) {
-		return consts.Active, nil
+	location := time.FixedZone("GMT+8", 8*60*60)
+	startTime := activity.StartTime.Time.In(location)
+	endTime := activity.EndTime.Time.In(location)
+	now = now.In(location)
+	vo.StartTime = startTime.Format("02.Jan.2006 15:04 MST")
+	vo.EndTime = endTime.Format("02.Jan.2006 15:04 MST")
+
+	if now.Before(startTime) {
+		vo.ActivityStatus = consts.NotStarted
+		return vo, nil
+	} else if now.After(startTime) && now.Before(endTime) {
+		vo.ActivityStatus = consts.Active
+		return vo, nil
 	} else {
-		return consts.Ended, nil
+		vo.ActivityStatus = consts.Ended
+		return vo, nil
 	}
 }
 

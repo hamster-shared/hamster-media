@@ -14,6 +14,8 @@ func Init() {
 	}
 	EmailService := service.NewEmailService(db)
 	activityService := service.NewActivityService(db)
+	contactService := service.NewContactService(db)
 	application.SetBean[*service.EmailService]("EmailService", EmailService)
 	application.SetBean[*service.ActivityService]("ActivityService", activityService)
+	application.SetBean[*service.ContactService]("ContactService", contactService)
 }
