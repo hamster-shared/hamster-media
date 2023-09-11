@@ -14,7 +14,7 @@ func TestSendEmail(t *testing.T) {
 	// }
 	param := parameter.EmailParams{
 		Name:                  "guozhihao",
-		Email:                 "gmail.guozhihao",
+		Email:                 "haijiang.mo@tntlinking.com",
 		SocialPlatform:        "gmail",
 		SocialAccount:         "123456789",
 		MiddlewareCategory:    "hello",
