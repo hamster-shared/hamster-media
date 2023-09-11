@@ -28,7 +28,7 @@ func (c *ContactService) GetContactPlatform() []string {
 
 func (c *ContactService) SaveEcosystemsContact(contactUsParam parameter.ContactUsParam) error {
 	var contactUs db.ContactUs
-	err := c.db.Model(&db.ContactUs{}).Where("contact_email_address = ?", contactUs.ContactEmailAddress).First(&contactUs).Error
+	err := c.db.Model(&db.ContactUs{}).Where("contact_email_address = ?", contactUsParam.ContactEmailAddress).First(&contactUs).Error
 	if err == nil {
 		return errors.New("you have added the contact information, the manager will contact you soon, please wait")
 	}

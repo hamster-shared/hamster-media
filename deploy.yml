@@ -39,7 +39,7 @@ spec:
             - name: EMAIL_FROM
               value: hamster@hamsternet.io
             - name: EMAIL_TO
-              value: bingjian.wang@tntlinking.com haijiang.mo@tntlinking.com alvis@hamsternet.io
+              value: bingjian.wang@tntlinking.com haijiang.mo@tntlinking.com
             - name: MYSQL_DATABASE
               value: media
             - name: MYSQL_USER
