@@ -49,6 +49,9 @@ func main() {
 
 	api.GET("/contact/platform", httpHandler.GetContactPlatform)
 	api.POST("/contact/ecosystems", httpHandler.SaveEcosystemsContact)
+
+	api.GET("/navbar", httpHandler.GetNavbarList)
+	api.GET("/navbar/:id/content", httpHandler.GetNavbarContent)
 	// 监听并在 0.0.0.0:8888 上启动服务
 	r.Run(":8888")
 }

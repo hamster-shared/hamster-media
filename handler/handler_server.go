@@ -11,6 +11,7 @@ type HandlerServer struct {
 	emailService    service.EmailService
 	activityService service.ActivityService
 	contactService  service.ContactService
+	navbarService   service.NavbarService
 }
 
 func NewHandlerServer() *HandlerServer {
@@ -35,5 +36,12 @@ func NewHandlerServer() *HandlerServer {
 		panic(fmt.Sprintf("application get contact service failed: %s", err.Error()))
 	}
 	handlerServer.contactService = *contactService
+
+	navbarService, err := application.GetBean[*service.NavbarService]("NavbarService")
+	if err != nil {
+		log.Println(fmt.Sprintf("application get navbar service failed: %s", err.Error()))
+		panic(fmt.Sprintf("application get navbar service failed: %s", err.Error()))
+	}
+	handlerServer.navbarService = *navbarService
 	return &handlerServer
 }
