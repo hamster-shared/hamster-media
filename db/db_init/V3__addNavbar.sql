@@ -39,7 +39,7 @@ INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path
 INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (14, 'Secure Deploy', null, 14, 6, 3, 3, null, '2023-11-03 17:54:17');
 INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (15, 'Development', null, 15, 7, 3, 1, null, '2023-11-03 17:54:36');
 INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (16, 'Secure Deploy', null, 16, 7, 3, 2, null, '2023-11-03 17:54:55');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (17, 'Template Market', null, 17, 8, 3, 1, null, '2023-11-03 17:55:30');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (17, 'Template', null, 17, 8, 3, 1, null, '2023-11-03 17:55:30');
 INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (18, 'Middleware', null, 18, 8, 3, 2, null, '2023-11-03 17:55:53');
 INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (19, 'Faucet', null, 19, 0, 1, 2, null, '2023-11-03 17:49:01');
 INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (20, 'Incubator', null, 20, 0, 1, 3, null, '2023-11-03 17:49:01');

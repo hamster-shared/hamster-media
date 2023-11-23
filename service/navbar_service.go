@@ -28,7 +28,7 @@ func (n *NavbarService) GetNavbarList() ([]vo.NavbarVo, error) {
 
 func (n *NavbarService) GetNavbarContent(id int) ([]db.NavbarContent, error) {
 	var navbarContentList []db.NavbarContent
-	err := n.db.Model(&db.NavbarContent{}).Where("navbar_id = ?", id).Find(&navbarContentList).Error
+	err := n.db.Model(&db.NavbarContent{}).Where("navbar_id = ?", id).Order("create_time desc").Find(&navbarContentList).Error
 	if err != nil {
 		return []db.NavbarContent{}, err
 	}
