@@ -18,7 +18,7 @@ func NewNavbarService(db *gorm.DB) *NavbarService {
 
 func (n *NavbarService) GetNavbarList() ([]vo.NavbarVo, error) {
 	var navbarList []db.Navbar
-	err := n.db.Model(&db.Navbar{}).Find(&navbarList).Error
+	err := n.db.Model(&db.Navbar{}).Order("sort asc").Find(&navbarList).Error
 	if err != nil {
 		return []vo.NavbarVo{}, err
 	}

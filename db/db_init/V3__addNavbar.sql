@@ -21,24 +21,29 @@ CREATE TABLE IF NOT EXISTS t_navbar_content (
     create_time     timestamp         NULL DEFAULT CURRENT_TIMESTAMP comment 'create_time'
 );
 
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (1, 'Features', null, 1, 0, 1, null, '2023-11-03 17:49:01');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (2, 'About', null, 2, 0, 1, null, '2023-11-03 17:49:14');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (3, 'Docs', null, 3, 0, 1, null, '2023-11-03 17:49:29');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (4, 'News', null, 4, 0, 1, null, '2023-11-03 17:49:41');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (5, 'Smart Contract', 'https://g.alpha.hamsternet.io/ipfs/QmbuyPRcusBJQVZbuiUX2JttVtUy2avccmB7iBPN54EJS3', 5, 1, 2, null, '2023-11-03 17:50:36');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (6, 'Front End', 'https://g.alpha.hamsternet.io/ipfs/QmRX8YNApkrtwbS5csARQXwGyZQwEcJ7NKMJT5CWMdWmcR', 6, 1, 2, null, '2023-11-03 17:51:02');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (7, 'Node', 'https://g.alpha.hamsternet.io/ipfs/QmSmDRuatkxV4M6mXfSBN17mqcwG6dNNhteccSoQsjVE3p', 7, 1, 2, null, '2023-11-03 17:51:23');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (8, 'Market', 'https://g.alpha.hamsternet.io/ipfs/QmdWX5L9aVMFQBwn1jgTAMXpr4pGrDQ5TiY3QxmhYvXVYb', 8, 1, 2, null, '2023-11-03 17:51:40');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (9, 'Development', null, 9, 5, 3, null, '2023-11-03 17:52:11');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (10, 'Secure Code', null, 10, 5, 3, null, '2023-11-03 17:52:35');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (11, 'Secure Deploy', null, 11, 5, 3, null, '2023-11-03 17:52:57');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (12, 'Development', null, 12, 6, 3, null, '2023-11-03 17:53:35');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (13, 'Secure Code', null, 13, 6, 3, null, '2023-11-03 17:53:52');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (14, 'Fast Deploy', null, 14, 6, 3, null, '2023-11-03 17:54:17');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (15, 'Development', null, 15, 7, 3, null, '2023-11-03 17:54:36');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (16, 'Secure Deploy', null, 16, 7, 3, null, '2023-11-03 17:54:55');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (17, 'Template Market', null, 17, 8, 3, null, '2023-11-03 17:55:30');
-INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, path, create_time) VALUES (18, 'Middleware', null, 18, 8, 3, null, '2023-11-03 17:55:53');
+ALTER TABLE t_navbar add sort         int    NOT NULL DEFAULT 0                 COMMENT 'sort' AFTER level;
+
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (1, 'Features', null, 1, 0, 1, 1, null, '2023-11-03 17:49:01');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (2, 'About', null, 2, 0, 1, 5, null, '2023-11-03 17:49:14');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (3, 'Docs', null, 3, 0, 1, 6, null, '2023-11-03 17:49:29');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (4, 'Community', null, 4, 0, 1, 4, null, '2023-11-03 17:49:41');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (5, 'Smart Contract', 'https://g.alpha.hamsternet.io/ipfs/QmbuyPRcusBJQVZbuiUX2JttVtUy2avccmB7iBPN54EJS3', 5, 1, 2, 2, null, '2023-11-03 17:50:36');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (6, 'Front End', 'https://g.alpha.hamsternet.io/ipfs/QmRX8YNApkrtwbS5csARQXwGyZQwEcJ7NKMJT5CWMdWmcR', 6, 1, 2, 3, null, '2023-11-03 17:51:02');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (7, 'Node', 'https://g.alpha.hamsternet.io/ipfs/QmSmDRuatkxV4M6mXfSBN17mqcwG6dNNhteccSoQsjVE3p', 7, 1, 2, 4, null, '2023-11-03 17:51:23');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (8, 'Market', 'https://g.alpha.hamsternet.io/ipfs/QmdWX5L9aVMFQBwn1jgTAMXpr4pGrDQ5TiY3QxmhYvXVYb', 8, 1, 2, 1, null, '2023-11-03 17:51:40');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (9, 'Development', null, 9, 5, 3, 1, null, '2023-11-03 17:52:11');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (10, 'Secure Code', null, 10, 5, 3, 2, null, '2023-11-03 17:52:35');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (11, 'Secure Deploy', null, 11, 5, 3, 3, null, '2023-11-03 17:52:57');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (12, 'Development', null, 12, 6, 3, 1, null, '2023-11-03 17:53:35');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (13, 'Secure Code', null, 13, 6, 3, 2, null, '2023-11-03 17:53:52');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (14, 'Secure Deploy', null, 14, 6, 3, 3, null, '2023-11-03 17:54:17');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (15, 'Development', null, 15, 7, 3, 1, null, '2023-11-03 17:54:36');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (16, 'Secure Deploy', null, 16, 7, 3, 2, null, '2023-11-03 17:54:55');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (17, 'Template Market', null, 17, 8, 3, 1, null, '2023-11-03 17:55:30');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (18, 'Middleware', null, 18, 8, 3, 2, null, '2023-11-03 17:55:53');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (19, 'Faucet', null, 19, 0, 1, 2, null, '2023-11-03 17:49:01');
+INSERT INTO media.t_navbar (id, name, icon, code, parent_code, level, sort, path, create_time) VALUES (20, 'Incubator', null, 20, 0, 1, 3, null, '2023-11-03 17:49:01');
+
 
 INSERT INTO media.t_navbar_content (id, navbar_id, icon, title, content, version, new_flag, path, create_time) VALUES (1, 9, 'https://g.alpha.hamsternet.io/ipfs/QmX5dHsSGRTtNzyaSHsHswaRjsChiniVaXMykGVa6XcJBx', 'Build Services', 'Intelligent contract building simplified. Construct smart contracts with one click, and efficiently manage versions and track code', '0.14.0', 0, 'https://hamsternet.io/docs/Automated workflow/EVM Contract/Build EVM Contract', '2023-11-06 10:25:23');
 INSERT INTO media.t_navbar_content (id, navbar_id, icon, title, content, version, new_flag, path, create_time) VALUES (2, 9, 'https://g.alpha.hamsternet.io/ipfs/QmPy8K1tWeTyPnETisiTjQUuwMWDbSvT8YDSCucyHkEpc8', 'Sandbox Services', 'The sandbox environment can be started online for developers and the OP network that can fork different environments', 'Coming Soon', 0, 'NA', '2023-11-06 10:25:54');
@@ -66,3 +71,5 @@ INSERT INTO media.t_navbar_content (id, navbar_id, icon, title, content, version
 INSERT INTO media.t_navbar_content (id, navbar_id, icon, title, content, version, new_flag, path, create_time) VALUES (24, 18, 'https://g.alpha.hamsternet.io/ipfs/QmWHfgCewndaWSd2xadXTXqCNLM3kF1fN5UsrYp8ryUzV8', 'RPC Service', 'To meet developers'' needs for building various ecological projects, Hamster provides efficient and stable RPC services, empowering developers to obtain high-quality node services', '0.6.0', 0, 'https://hamsternet.io/docs/Middleware/User Guide/RPC/', '2023-11-06 10:55:43');
 INSERT INTO media.t_navbar_content (id, navbar_id, icon, title, content, version, new_flag, path, create_time) VALUES (25, 18, 'https://g.alpha.hamsternet.io/ipfs/QmZW3R6FftxoviiDc7i9Q9fVh5L6E1wFzdHConz59LooQf', 'Node Service', 'Deploy independent blockchain nodes to meet developers'' needs for accessing and using nodes', '0.10.0', 0, 'NA', '2023-11-06 10:55:43');
 INSERT INTO media.t_navbar_content (id, navbar_id, icon, title, content, version, new_flag, path, create_time) VALUES (26, 18, 'https://g.alpha.hamsternet.io/ipfs/QmbcDRJ1cqTB1oYpUwbCnpDH6AscDAaE6sRq885mvWSsSS', 'Oracle Service', 'To enable developers to quickly integrate suitable oracle solutions with no or low code, Hamster platform aggregates middleware for various oracle solutions in the market', '0.6.1', 0, 'https://hamsternet.io/docs/Middleware/User Guide/Hamslink/', '2023-11-06 10:55:43');
+INSERT INTO media.t_navbar_content (id, navbar_id, icon, title, content, version, new_flag, path, create_time) VALUES (27, 18, 'https://g.alpha.hamsternet.io/ipfs/QmPPgT6WngLeZMATVNeCuuJJTfU4f2c4VMQYF8zAMhPQSX', 'Miwaspace', 'Miwaspace is a middleware marketplace that aggregates common middleware solutions in the market to meet your needs in all aspects.', '0.10.0', 0, 'https://hamsternet.io/middleware', '2023-11-06 10:55:43');
+
