@@ -1,10 +1,13 @@
 package service
 
 import (
+	"database/sql"
+	"errors"
 	"getNews/db"
 	"getNews/service/parameter"
 	"github.com/jinzhu/copier"
 	"gorm.io/gorm"
+	"time"
 )
 
 type EmailService struct {
@@ -37,4 +40,22 @@ func (e *EmailService) SaveIp(param parameter.EmailParams, ip string) error {
 		return err
 	}
 	return nil
+}
+
+func (e *EmailService) SaveSubscribeEmail(param parameter.SubscribeEmailParams) error {
+	var subscribeEmail db.SubscribeEmail
+	err := e.db.Model(db.SubscribeEmail{}).Where("email = ?", param.Email).First(&subscribeEmail).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		subscribeEmail.Email = param.Email
+		subscribeEmail.CreateTime = sql.NullTime{
+			Time:  time.Now(),
+			Valid: true,
+		}
+		e.db.Model(db.SubscribeEmail{}).Create(&subscribeEmail)
+		return nil
+	}
+	if err != nil {
+		return err
+	}
+	return errors.New("The subscription email already exists and cannot be duplicated")
 }

@@ -35,3 +35,21 @@ func (h *HandlerServer) JoinMiddleware(gin *gin.Context) {
 	}
 	Success(nil, gin)
 }
+
+func (h *HandlerServer) SubscribeEmail(gin *gin.Context) {
+	var param parameter.SubscribeEmailParams
+	err := gin.BindJSON(&param)
+	if err != nil {
+		log.Println(err.Error())
+		Fail("param invalid", gin)
+		return
+	}
+	err = h.emailService.SaveSubscribeEmail(param)
+	if err != nil {
+		log.Printf("subscribe email failed:%s", err.Error())
+		log.Println(err.Error())
+		Fail(err.Error(), gin)
+		return
+	}
+	Success(nil, gin)
+}

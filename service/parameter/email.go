@@ -9,6 +9,10 @@ type EmailParams struct {
 	MiddlewareInformation string `json:"middlewareInformation"`
 }
 
+type SubscribeEmailParams struct {
+	Email string `json:"email"`
+}
+
 //"name": "guozhihao"
 //"email": "335247945@qq.com"
 //"socialPlatform": "gmail",
