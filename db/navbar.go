@@ -12,6 +12,7 @@ type Navbar struct {
 	ParentCode int       `json:"parentCode"`
 	Level      int       `json:"level"`
 	Path       string    `json:"path"`
+	Sort       int       `json:"sort"`
 	CreateTime time.Time `gorm:"create_time;default:current_timestamp" json:"createTime"`
 }
 

@@ -28,11 +28,10 @@ func (c *ContactService) GetContactPlatform() []string {
 
 func (c *ContactService) SaveEcosystemsContact(contactUsParam parameter.ContactUsParam) error {
 	var contactUs db.ContactUs
-	err := c.db.Model(&db.ContactUs{}).Where("contact_email_address = ?", contactUsParam.ContactEmailAddress).First(&contactUs).Error
+	err := c.db.Model(&db.ContactUs{}).Where("contact_email_address = ? and topic = ?", contactUsParam.ContactEmailAddress, contactUsParam.Topic).First(&contactUs).Error
 	if err == nil {
 		return errors.New("you have added the contact information, the manager will contact you soon, please wait")
 	}
-
 	err = copier.Copy(&contactUs, &contactUsParam)
 	if err != nil {
 		return err
@@ -49,7 +48,7 @@ func (c *ContactService) SaveEcosystemsContact(contactUsParam parameter.ContactU
 		return err
 	}
 	contactUs.EmailSeedFlag = consts.Seed
-	err = c.db.Model(&db.ContactUs{}).Where("contact_email_address = ?", contactUs.ContactEmailAddress).Updates(&contactUs).Error
+	err = c.db.Model(&db.ContactUs{}).Where("id = ?", contactUs.Id).Updates(&contactUs).Error
 	if err != nil {
 		return err
 	}

@@ -18,7 +18,7 @@ func NewNavbarService(db *gorm.DB) *NavbarService {
 
 func (n *NavbarService) GetNavbarList() ([]vo.NavbarVo, error) {
 	var navbarList []db.Navbar
-	err := n.db.Model(&db.Navbar{}).Find(&navbarList).Error
+	err := n.db.Model(&db.Navbar{}).Order("sort asc").Find(&navbarList).Error
 	if err != nil {
 		return []vo.NavbarVo{}, err
 	}
@@ -28,7 +28,7 @@ func (n *NavbarService) GetNavbarList() ([]vo.NavbarVo, error) {
 
 func (n *NavbarService) GetNavbarContent(id int) ([]db.NavbarContent, error) {
 	var navbarContentList []db.NavbarContent
-	err := n.db.Model(&db.NavbarContent{}).Where("navbar_id = ?", id).Find(&navbarContentList).Error
+	err := n.db.Model(&db.NavbarContent{}).Where("navbar_id = ?", id).Order("create_time desc").Find(&navbarContentList).Error
 	if err != nil {
 		return []db.NavbarContent{}, err
 	}

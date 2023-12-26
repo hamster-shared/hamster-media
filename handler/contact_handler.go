@@ -3,7 +3,6 @@ package handler
 import (
 	"getNews/service/parameter"
 	"github.com/gin-gonic/gin"
-	"log"
 )
 
 func (h *HandlerServer) GetContactPlatform(gin *gin.Context) {
@@ -15,7 +14,6 @@ func (h *HandlerServer) SaveEcosystemsContact(gin *gin.Context) {
 	var contactUsParam parameter.ContactUsParam
 	err := gin.BindJSON(&contactUsParam)
 	if err != nil {
-		log.Println(err.Error())
 		Fail("param invalid", gin)
 		return
 	}
